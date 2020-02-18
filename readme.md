@@ -1,6 +1,10 @@
 # Note API Server
 Latihan membuat Note API backend yang dibuat menggunakan Express Js.
 
+## Branch
+* Branch Master - hanya manipulasi data array
+* Branch MySQL - Menggunakan database MySQL
+
 Untuk menjalankan file silakan clone dan jalankan:
 
 ```
