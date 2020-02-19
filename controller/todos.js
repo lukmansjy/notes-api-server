@@ -1,40 +1,40 @@
-const connection = require('../db')
+const Todo = require('../models').todo
 
 exports.index = (req, res) =>{
-    connection.query('SELECT * FROM todos', (err, rows)=>{
-        if(err) throw err
-        res.send(rows)
-    })
+    Todo.findAll().then(todos => res.send(todos))
+    
 }
 
 exports.show = (req, res) => {
-    connection.query(`SELECT * FROM todos WHERE id=${req.params.id}`, (err, rows)=>{
-        if(err) throw err
-        res.send(rows[0])
-    })
+    Todo.findOne({where: {id: req.params.id}}).then(todo => res.send(todo))
 }
 
 exports.post = (req, res) =>{
-    const { title, isDone } =  req.body
-    connection.query(`INSERT INTO todos (title, isDone) VALUES ("${title}", "${isDone}")`, (err, rows)=>{
-        if(err) throw err
-        res.send({"message": "success"})
+    Todo.create(req.body).then(todo => {
+        res.send({
+            message: "success",
+            todo
+        })
     })
 }
 
 exports.patch = (req, res) =>{
-    const id = req.params.id
-    const { title, isDone } =  req.body
-    connection.query(`UPDATE todos SET title='${title}', isDone='${isDone}' WHERE id=${id}`, (err, rows)=>{
-        if(err) throw err
-        res.send({"message": "success"})
+    Todo.update(
+        req.body,
+        {where: {id: req.params.id}}
+    ).then(todo => {
+        res.send({
+            message: "success",
+            todo
+        })
     })
 }
 
 exports.delete = (req, res) =>{
-    const id = req.params.id
-    connection.query(`DELETE FROM todos WHERE id=${id}`, (err, rows)=>{
-        if(err) throw err
-        res.send({"message": "success"})
+    Todo.destroy({where: {id: req.params.id}}).then(todo => {
+        res.send({
+            message: "success",
+            todo
+        })
     })
 }
