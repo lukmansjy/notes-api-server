@@ -15,8 +15,8 @@ exports.show = (req, res) => {
 }
 
 exports.post = (req, res) =>{
-    const data = req.body
-    connection.query(`INSERT INTO todos (title, isDone) VALUES ("${data.title}", "${data.isDone}")`, (err, rows)=>{
+    const { title, isDone } =  req.body
+    connection.query(`INSERT INTO todos (title, isDone) VALUES ("${title}", "${isDone}")`, (err, rows)=>{
         if(err) throw err
         res.send({"message": "success"})
     })
@@ -24,8 +24,8 @@ exports.post = (req, res) =>{
 
 exports.patch = (req, res) =>{
     const id = req.params.id
-    const data = req.body
-    connection.query(`UPDATE todos SET title='${data.title}', isDone='${data.isDone}' WHERE id=${id}`, (err, rows)=>{
+    const { title, isDone } =  req.body
+    connection.query(`UPDATE todos SET title='${title}', isDone='${isDone}' WHERE id=${id}`, (err, rows)=>{
         if(err) throw err
         res.send({"message": "success"})
     })
