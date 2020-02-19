@@ -1,6 +1,17 @@
 # Note API Server
 Latihan membuat Note API backend yang dibuat menggunakan Express Js.
 
+## Branch
+* Branch Master - hanya manipulasi data array
+* Branch MySQL - Menggunakan database MySQL
+* Branch sequelize - Menggunakan sequelize ORM
+
+Untuk menggunakan branch MySQL silakan membuat table `course-express` dan kemudian import file `course-express.sql` yang ada didalam project ini.
+
+Untuk menggunakan branch sequelize buat table `course-express` dan jalanakan perintah `npx sequelize db:migrate` untuk migrasi table yang ada di folder migrations. Kemudian jalankan `npx sequelize db:seed:all ` untuk mengisi data dummy yang ada di folder seeders
+
+Untu
+
 Untuk menjalankan file silakan clone dan jalankan:
 
 ```
